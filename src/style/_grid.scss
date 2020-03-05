@@ -1,0 +1,18 @@
+.grid {
+  display: grid;
+}
+.grid_center {
+  justify-items: center;
+}
+.grid_center_vertical {
+  align-items: center;
+}
+.flex {
+  display: flex;
+}
+.flex_cnter_certical {
+  align-items: center;
+}
+.flex_between {
+  justify-content: space-between;
+}
