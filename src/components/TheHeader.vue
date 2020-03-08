@@ -1,9 +1,7 @@
 <template>
   <div class="header w_max flex flex_between flex_center_vertical">
-    <a href="#" @click="$_header_pushHome" class="login">
-      <p>{{ login }}</p>
-    </a>
-    <button  @click="$_header_pushAdd" class="btn btn_create icon-create"></button>
+     <p class="login">{{ login }}</p>
+    <button v-show="path" @click="$_header_pushAdd" class="btn btn_create icon-create"></button>
   </div>
 </template>
 <script>
@@ -13,12 +11,14 @@ export default {
       login: 'todo'
     }
   },
+  computed: {
+    path () {
+      return this.$route.path !== '/edit'
+    }
+  },
   methods: {
-    $_header_pushHome () {
-      this.$router.push('Home')
-    },
     $_header_pushAdd () {
-      this.$router.push('Edit')
+      this.$router.push('/edit')
     }
   }
 }
@@ -29,12 +29,11 @@ export default {
 }
 .login {
   text-transform: capitalize;
+  font-weight: bold;
   font-size: 3rem;
-  p:first-letter {
-    color: orange;
-  }
-  p {
-    color: black;
+  color: black;
+  &:first-letter {
+    color: orangered;
   }
 }
 .btn_create {

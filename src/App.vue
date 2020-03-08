@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app grid">
     <header class="app-header">
       <TheHeader/>
     </header>
@@ -22,6 +22,9 @@ export default {
 </script>
 
 <style lang="scss">
+.app {
+  grid-template-rows: auto 1fr;
+}
 .app-header, .app-main {
   margin: 0 auto 0;
   max-width: 1230px;
