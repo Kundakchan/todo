@@ -3,7 +3,7 @@ export default {
     notes: [
       {
         id: 1,
-        title: 'title',
+        title: 'title -1',
         tasks: [
           {
             text: 'task -- 1',
@@ -21,7 +21,7 @@ export default {
       },
       {
         id: 2,
-        title: 'title',
+        title: 'title -2',
         tasks: [
           {
             text: 'task -- 1',
@@ -42,6 +42,9 @@ export default {
   mutations: {},
   actions: {},
   getters: {
-    getNotes: state => state.notes
+    getNotes: state => state.notes,
+    getNote: state => id => {
+      return state.notes.find(item => String(item.id) === String(id))
+    }
   }
 }

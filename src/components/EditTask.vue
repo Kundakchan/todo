@@ -1,7 +1,7 @@
 <template>
   <div class="edit-task grid grid_center grid_center_vertical">
     <span class="group_control w_max">
-      <input type="text" class="control edit-task_control w_max">
+      <input type="text" class="control edit-task_control w_max" v-model="task">
     </span>
     <span class="edit-task-checked">
       <label class="check grid grid_center_vertical">
@@ -18,9 +18,13 @@
 
 <script>
 export default {
+  props: {
+    options: Object
+  },
   data () {
     return {
-      checked: false
+      task: this.options.text,
+      checked: this.options.status
     }
   },
   methods: {

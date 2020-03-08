@@ -1,16 +1,26 @@
 <template>
   <div class="edit-title grid grid_center_vertical shadow">
-    <input class="control edit-title__control" type="text">
+    <input class="control edit-title__control" type="text" v-model="title">
     <div class="add">
-      <button class="btn btn_add-task icon-plus"></button>
+      <button class="btn btn_add-task icon-plus" @click="taskAdd"></button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    options: String
+  },
   data () {
-    return {}
+    return {
+      title: this.options
+    }
+  },
+  methods: {
+    taskAdd () {
+      this.$emit('taskAdd', true)
+    }
   }
 }
 </script>

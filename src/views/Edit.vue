@@ -1,11 +1,14 @@
 <template>
   <section class="edit grid h_max">
     <div class="edit__header">
-      <EditTitle/>
+      <EditTitle
+        :options="note.title"
+        @taskAdd="taskAdd($event)"
+      />
     </div>
     <ul class="edit__body">
-      <li class="edit__body-item" v-for="index in 5" :key="index">
-        <EditTask/>
+      <li class="edit__body-item" v-for="(item, index) in note.tasks" :key="index">
+        <EditTask :options="item"/>
       </li>
     </ul>
     <div class="edit__footer">
@@ -18,14 +21,51 @@
 import EditTitle from '@/components/EditTitle'
 import EditTask from '@/components/EditTask'
 import EditBottom from '@/components/EditBottom'
+import { mapGetters } from 'vuex'
 export default {
+  props: {
+    id: String
+  },
   components: {
     EditTitle,
     EditTask,
     EditBottom
   },
   data () {
-    return {}
+    return {
+      note: null
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'getNote'
+    ])
+  },
+  methods: {
+    $_taskInit () {
+      if (this.id) {
+        this.note = JSON.parse(JSON.stringify(this.getNote(this.id)))
+      } else {
+        this.note = {
+          title: 'Новая заметка',
+          tasks: [
+            {
+              text: 'Новая задача',
+              status: false
+            }
+          ]
+        }
+      }
+    },
+    taskAdd (event) {
+      this.note.tasks.push({
+        text: 'Новая запись',
+        status: false
+      })
+    }
+  },
+  created () {
+    this.$_taskInit()
   }
 }
 </script>

@@ -11,9 +11,16 @@ const routes = [
     component: Home
   },
   {
-    path: '/edit',
+    path: '/edit/:id',
     name: 'edit',
-    component: () => import('@/views/Edit')
+    component: () => import('@/views/Edit'),
+    props: true
+  },
+  {
+    path: '/edit',
+    name: 'create',
+    component: () => import('@/views/Edit'),
+    props: true
   }
 ]
 
