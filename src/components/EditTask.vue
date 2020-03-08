@@ -4,7 +4,11 @@
       <input type="text" class="control edit-task_control w_max">
     </span>
     <span class="edit-task-checked">
-      <input type="checkbox">
+      <label class="check grid grid_center_vertical">
+        <input type="checkbox" class="check__input">
+        <span @click="$_editTask_checked" v-if="checked" class="check__box check__box_checked icon-check"></span>
+        <span @click="$_editTask_checked" v-if="!checked" class="check__box icon-uncheck"></span>
+      </label>
     </span>
     <span class="edit-task-delete">
       <button class="btn edit-task-icon icon-delete shadow"></button>
@@ -15,7 +19,14 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      checked: false
+    }
+  },
+  methods: {
+    $_editTask_checked () {
+      this.checked = !this.checked
+    }
   }
 }
 </script>
@@ -31,6 +42,20 @@ export default {
   font-size: 1.4rem;
   border: none;
   font-weight: 300;
+}
+.check {
+  position: relative;
+}
+.check__input {
+  position: absolute;
+  appearance: none;
+}
+.check__box {
+  padding: .3em .7em;
+  cursor: pointer;
+}
+.check__box_checked {
+  color: blue;
 }
 .edit-task-icon {
   border-radius: 100%;
