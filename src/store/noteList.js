@@ -34,6 +34,14 @@ export default {
         console.error(error)
         throw error
       }
+    },
+    async NOTE__UPDATE ({ commit }, payload) {
+      try {
+        await firebase.database().ref('/note').child(payload.id).set(payload.note)
+      } catch (error) {
+        console.error(error.message)
+        throw error
+      }
     }
   },
   getters: {

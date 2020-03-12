@@ -1,6 +1,6 @@
 <template>
   <div class="edit-title grid grid_center_vertical shadow">
-    <input class="control edit-title__control" type="text" v-model="title">
+    <input class="control edit-title__control" @input="updateTitle" type="text" v-model="title">
     <div class="add">
       <button class="btn btn_add-task icon-plus" @click="taskAdd"></button>
     </div>
@@ -20,6 +20,9 @@ export default {
   methods: {
     taskAdd () {
       this.$emit('taskAdd', true)
+    },
+    updateTitle () {
+      this.$emit('update:title', this.title)
     }
   }
 }

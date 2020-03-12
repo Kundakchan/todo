@@ -4,11 +4,17 @@
       <EditTitle
         :options="note.title"
         @taskAdd="taskAdd()"
+        @update:title="updateTitle($event)"
       />
     </div>
     <ul v-if="!showMessageDelete" class="edit__body">
       <li class="edit__body-item" v-for="(item) in note.tasks" :key="item.id">
-        <EditTask :options="item" @taskDelete="taskDelete($event)"/>
+        <EditTask
+         :options="item"
+          @taskDelete="taskDelete($event)"
+          @update:task="updateTask($event)"
+          @update:checkbox="updateTaskCheckbox($event)"
+        />
       </li>
     </ul>
     <div v-if="!showMessageDelete" class="edit__footer">
@@ -74,6 +80,9 @@ export default {
         }
       }
     },
+    updateTitle (event) {
+      this.note.title = event
+    },
     taskAdd () {
       this.note.tasks.push({
         id: Number((Math.random() * 1e8).toFixed(0)).toString(16),
@@ -83,6 +92,16 @@ export default {
     },
     taskDelete (event) {
       this.note.tasks.splice(this.note.tasks.findIndex(item => item.id === event), 1)
+    },
+    updateTask (event) {
+      this.note.tasks.forEach(item => {
+        if (item.id === event.id) item.text = event.input
+      })
+    },
+    updateTaskCheckbox (event) {
+      this.note.tasks.forEach(item => {
+        if (item.id === event.id) item.status = event.input
+      })
     },
     noteAdd () {
       this.$store.dispatch('NOTE__ADD', this.note)
@@ -95,11 +114,11 @@ export default {
       this.$router.push('/')
     },
     noteSave () {
+      this.$store.dispatch('NOTE__UPDATE', { id: this.id, note: this.note })
     }
   },
   created () {
     this.$_taskInit()
-    // console.log(this.id)
   }
 }
 </script>

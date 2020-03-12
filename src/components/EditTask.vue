@@ -1,11 +1,20 @@
 <template>
   <div class="edit-task grid grid_center grid_center_vertical">
     <span class="group_control w_max">
-      <input type="text" class="control edit-task_control w_max" v-model="task">
+      <input
+        type="text"
+        class="control edit-task_control w_max"
+        v-model="task"
+        @input="updateTask"
+      >
     </span>
     <span class="edit-task-checked">
       <label class="check grid grid_center_vertical">
-        <input type="checkbox" class="check__input">
+        <input
+          type="checkbox"
+          class="check__input"
+          @input="updateCheckbox"
+        >
         <span @click="$_editTask_checked" v-if="checked" class="check__box check__box_checked icon-check"></span>
         <span @click="$_editTask_checked" v-if="!checked" class="check__box icon-uncheck"></span>
       </label>
@@ -34,6 +43,12 @@ export default {
     },
     taskDelete () {
       this.$emit('taskDelete', this.id)
+    },
+    updateTask () {
+      this.$emit('update:task', { id: this.id, input: this.task })
+    },
+    updateCheckbox () {
+      this.$emit('update:checkbox', { id: this.id, input: this.checked })
     }
   }
 }
