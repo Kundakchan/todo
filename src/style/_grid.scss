@@ -10,10 +10,13 @@
 .flex {
   display: flex;
 }
+.flex_center {
+  justify-content: center;
+}
 .flex_right {
   justify-content: flex-end;
 }
-.flex_cnter_certical {
+.flex_cnter_vertical {
   align-items: center;
 }
 .flex_between {

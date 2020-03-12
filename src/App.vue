@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="app grid">
+    <Preloader :show="preloader"/>
     <header class="app-header">
       <TheHeader/>
     </header>
@@ -11,12 +12,16 @@
 
 <script>
 import TheHeader from '@/components/TheHeader'
+import Preloader from '@/components/Preloader'
 export default {
   components: {
-    TheHeader
+    TheHeader,
+    Preloader
   },
   data () {
-    return {}
+    return {
+      preloader: false
+    }
   }
 }
 </script>

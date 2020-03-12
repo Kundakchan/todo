@@ -1,7 +1,7 @@
 <template>
   <ul class="note-list grid">
-    <li v-for="(item) in getNotes" :key="item.id">
-      <BaseNote :options="item"/>
+    <li v-for="(item, key) in getNoteList" :key="key">
+      <BaseNote :options="item" :id="key"/>
     </li>
   </ul>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getNotes'
+      'getNoteList'
     ])
   }
 }

@@ -8,8 +8,8 @@
     </div>
     <div class="note__footer shadow flex flex_right">
       <div class="btn_group">
-        <button class="btn btn_note icon-edit"></button>
-        <button class="btn btn_note icon-delete"></button>
+        <button class="btn btn_note icon-edit" @click="noteEdit(id)"></button>
+        <button class="btn btn_note icon-delete" @click="noteDelete"></button>
       </div>
     </div>
   </article>
@@ -20,10 +20,11 @@ export default {
   props: {
     options: {
       type: Object,
-      required: true,
-      id: String,
-      title: String,
-      tasks: Array
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
     }
   },
   components: {
@@ -31,6 +32,14 @@ export default {
   },
   data () {
     return {}
+  },
+  methods: {
+    noteDelete () {
+      this.$store.dispatch('NOTE__DELETE', this.id)
+    },
+    noteEdit (id) {
+      this.$router.push(`/edit/${this.id}`)
+    }
   }
 }
 </script>

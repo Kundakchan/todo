@@ -11,7 +11,7 @@
       </label>
     </span>
     <span class="edit-task-delete">
-      <button class="btn edit-task-icon icon-delete shadow"></button>
+      <button @click="taskDelete" class="btn edit-task-icon icon-delete shadow"></button>
     </span>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
   },
   data () {
     return {
+      id: this.options.id,
       task: this.options.text,
       checked: this.options.status
     }
@@ -30,6 +31,9 @@ export default {
   methods: {
     $_editTask_checked () {
       this.checked = !this.checked
+    },
+    taskDelete () {
+      this.$emit('taskDelete', this.id)
     }
   }
 }

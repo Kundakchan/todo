@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import note from '@/store/note'
+import init from '@/store/init'
+import noteList from '@/store/noteList'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    note
+    init,
+    noteList
   }
 })
