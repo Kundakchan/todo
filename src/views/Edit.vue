@@ -105,6 +105,7 @@ export default {
     },
     noteAdd () {
       this.$store.dispatch('NOTE__ADD', this.note)
+      this.$_taskInit()
     },
     noteRemove () {
       this.$store.dispatch('NOTE__DELETE', this.id)

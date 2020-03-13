@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     path () {
-      return this.$route.path !== '/edit'
+      return this.$route.path === '/'
     }
   },
   methods: {

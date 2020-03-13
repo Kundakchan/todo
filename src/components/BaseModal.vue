@@ -1,6 +1,10 @@
 <template>
   <transition name="modal">
-    <section class="modal grid grid_center grid_center_vertical">
+    <section
+      v-if="show"
+      class="modal grid grid_center grid_center_vertical"
+      @click="modalClose($event)"
+    >
       <div class="modal__content">
         <slot></slot>
       </div>
@@ -10,8 +14,19 @@
 
 <script>
 export default {
+  props: {
+    show: {
+      type: Boolean,
+      required: true
+    }
+  },
   data () {
     return {}
+  },
+  methods: {
+    modalClose (event) {
+      if (event.target.classList.contains('modal')) this.$emit('close', true)
+    }
   }
 }
 </script>
@@ -27,7 +42,13 @@ export default {
   right: 0;
 }
 .modal__content {
-  height: 80%;
-  width: 80%;
+  height: 60%;
+  width: 60%;
+}
+.modal-enter-active, .modal-leave-active {
+  transition: opacity .3s;
+}
+.modal-enter, .modal-leave-to {
+  opacity: 0;
 }
 </style>

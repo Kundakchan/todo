@@ -12,9 +12,18 @@
         <button class="btn btn_note icon-delete" @click="noteDelete"></button>
       </div>
     </div>
+    <BaseModal @close="modalOpen" :show="modalShow">
+      <BaseWarning
+        :message="warning"
+        @cancel="modalOpen"
+        @confirm="modalConfirm"
+      />
+    </BaseModal>
   </article>
 </template>
 <script>
+import BaseModal from '@/components/BaseModal'
+import BaseWarning from '@/components/BaseWarning'
 import BaseNoteTasks from '@/components/BaseNoteTasks'
 export default {
   props: {
@@ -28,17 +37,29 @@ export default {
     }
   },
   components: {
+    BaseModal,
+    BaseWarning,
     BaseNoteTasks
   },
   data () {
-    return {}
+    return {
+      warning: 'Вы уверены что хотите удалить заметку ?',
+      modalShow: false
+    }
   },
   methods: {
     noteDelete () {
-      this.$store.dispatch('NOTE__DELETE', this.id)
+      this.modalOpen()
     },
     noteEdit (id) {
       this.$router.push(`/edit/${this.id}`)
+    },
+    modalConfirm () {
+      this.$store.dispatch('NOTE__DELETE', this.id)
+      this.modalOpen()
+    },
+    modalOpen () {
+      this.modalShow = !this.modalShow
     }
   }
 }
